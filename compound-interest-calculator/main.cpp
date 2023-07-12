@@ -6,36 +6,60 @@
 //
 
 #include <iostream>
+#include <iomanip>
+#include <locale>
 
 using namespace std;
+
+// Function
+double compoundInterestCalculator(double principal, double addition, double interest, int years){
+    double result = principal * pow(1 + (interest / 100), years);
+    result += addition * (pow(1 + (interest / 100), years) - 1) / (interest / 100);
+    
+    return result;
+}
 
 int main() {
 //  Var
     string exit = "yes";
-    float currentPrincipal = 0, annualAddition = 0, interestRate = 0, futureValue = 0;
-    int yearsToGrow = 0;
     
 //  Start program
     cout << "Hello, welcome to the compound interest calculator! \nTo begin with, I would like to ask you for some information... \n";
     
 //  Continue loop
-    while (exit == "yes") {
+    while(exit == "yes") {
+        
+//      Var in loop
+        double currentPrincipal = 0, annualAddition = -1, interestRate = 0;
+        int yearsToGrow = 0;
 //      Data
-        cout << "\nWhat is your current principal?: $";
-        cin >> currentPrincipal;
-        cout << "What will be your annual addition?: $";
-        cin >> annualAddition;
-        cout << "For how many years are you going to do this?: ";
-        cin >> yearsToGrow;
-        cout << "And finally, how much will the annual interest rate be? (%): ";
-        cin >> interestRate;
+        cout << endl;
+        while(currentPrincipal <= 0) {
+            cout << "What is your current principal?: $";
+            cin >> currentPrincipal;
+        }
+        while(annualAddition < 0) {
+            cout << "What will be your annual addition?: $";
+            cin >> annualAddition;
+        }
+        while(yearsToGrow <= 0) {
+            cout << "For how many years are you going to do this?: ";
+            cin >> yearsToGrow;
+        }
+        while(interestRate <= 0) {
+            cout << "And finally, how much will the annual interest rate be?(%): ";
+            cin >> interestRate;
+        }
         
 //      Results
-        cout << "Making the necessary calculations I can say that your future value will be: " << futureValue << endl;
+        double futureValue = compoundInterestCalculator(currentPrincipal, annualAddition, interestRate, yearsToGrow);
+        cout.imbue(locale("en_US.UTF-8"));
+        cout << "Making the necessary calculations I can say that your future value in " << yearsToGrow <<" years will be: $" << fixed << setprecision(2) << showpoint << put_money(futureValue * 100, true) << endl;
         
 //      Continue?
-        cout << "Want to star again? (yes/no): ";
+        cout << "Want to start again? (yes/no): ";
         cin >> exit;
     }
+
     return 0;
 }
