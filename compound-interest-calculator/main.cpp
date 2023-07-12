@@ -21,13 +21,13 @@ double compoundInterestCalculator(double principal, double addition, double inte
 
 int main() {
 //  Var
-    string exit = "yes";
+    string continu3 = "no";
     
 //  Start program
     cout << "Hello, welcome to the compound interest calculator! \nTo begin with, I would like to ask you for some information... \n";
     
 //  Continue loop
-    while(exit == "yes") {
+    do {
         
 //      Var in loop
         double currentPrincipal = 0, annualAddition = -1, interestRate = 0;
@@ -58,8 +58,8 @@ int main() {
         
 //      Continue?
         cout << "Want to start again? (yes/no): ";
-        cin >> exit;
-    }
+        cin >> continu3;
+    } while (continu3 == "yes");
 
     return 0;
 }
