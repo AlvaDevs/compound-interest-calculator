@@ -28,7 +28,6 @@ int main() {
     
 //  Continue loop
     do {
-        
 //      Var in loop
         double currentPrincipal = 0, annualAddition = -1, interestRate = 0;
         int yearsToGrow = 0;
